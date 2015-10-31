@@ -15,7 +15,7 @@ def monthlyactivity(interest, principal, apr, limit, totalprin):
                 #principal = 0.0
                 day = 0
                 prevday = 0
-                print "at the end of this month, total pending = $" + str(totalprin+interest)
+                print "at the end of this month, total pending = $" + str(int(((totalprin+interest)*100) + 0.5)/100.0)
                 continue
                 
         else:
@@ -54,7 +54,7 @@ def monthlyactivity(interest, principal, apr, limit, totalprin):
 
 def main():
     try:    
-        apr = float(input("Enter apr: " ))
+        apr = float(input("Enter apr as a decimal. Eg: 25% is 0.25 : " ))
     except:
         apr = 0.25
     try:    
@@ -68,6 +68,6 @@ def main():
     interest = result[0]
     principal = result[1]
     totalprin = result[2]
-    print "at the end of your entire credit history for this account, total payable = $" + str(totalprin+interest)
+    print "at the end of your entire credit history for this account, total payable = $" + str(int(((totalprin+interest)*100) + 0.5)/100.0)
     
 main()
