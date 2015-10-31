@@ -1,14 +1,3 @@
-def total(string):          # this method is just to convert our input of a list of transactions into a sum
-    newlist = string.split()
-    sumtotal = 0.0
-    for item in newlist:
-        try:
-            itemhere = float(item)
-            sumtotal+=itemhere
-        except:
-            continue
-    return sumtotal   
-
 def monthlyactivity(interest, principal, apr, limit, totalprin):
     print "enter day number from this month and transactions on that day, in order. Enter day as 31 to end simulation for this month,"
     day = 0
@@ -18,12 +7,12 @@ def monthlyactivity(interest, principal, apr, limit, totalprin):
         if day == 31:
             newinterest = (day-prevday) * (apr/365) * principal
             interest+=newinterest
-            totalprin+=principal
+            totalprin=principal
             check = int(input("would you like to end the entire simulation? Enter 1 for 'yes' and 0 for 'no':"))
             if check ==1:
                 break
             else:
-                principal = 0.0
+                #principal = 0.0
                 day = 0
                 prevday = 0
                 print "at the end of this month, total pending = $" + str(totalprin+interest)
@@ -35,21 +24,30 @@ def monthlyactivity(interest, principal, apr, limit, totalprin):
                 print "your day was either before the previous day or more than 31. Retry entering the day"
                 continue
             else:
-                withdrawals = raw_input("enter all withdrawals separated by spaces, no dollar signs: ")
-                withdrawals = total(withdrawals)
-                deposits = raw_input("enter all deposits separated by spaces, no dollar signs: ")
-                deposits = total(deposits)
-                activity = withdrawals - deposits
                 newinterest = (day-prevday) * (apr/365) * principal
                 interest+=newinterest
+                counter = 0 
+                transact =0
+                activity = 0
+                print "enter transactions now. Eg, for deposit of $100, type '-100', and for withdrawal of $100, type '100'. Enter 0 for ending this day's transactions"
+                while (counter==0 or transact!=0):
+                    counter = 1
+                    try:
+                        transact = float(input("transaction: "))
+                        if transact == 0.0:
+                            break
+                    except:
+                        break
+                    else:
+                        if principal+transact<0:
+                            print "your deposit was too much and $" + str(-1*(principal+transact)) +  " of it has been returned"
+                            principal = 0
+                        elif principal+transact>limit:
+                            print "your withdrawal was too much and $" + str(transact) + " has been declined"
+                        else:
+                            activity+=transact
+                            principal+=transact
                 prevday = day
-                principal = principal + activity
-                if principal<0:
-                    print "your deposit was too much and $" + str(-1*activity) +  " of it has been returned"
-                    principal = 0
-                if principal>limit:
-                    print "your withdrawal was too much and $" + str(activity-limit) + " of it has been declined"
-                    principal = limit
     return [interest, principal, totalprin]
 
 
