@@ -1,0 +1,12 @@
+This implementation is supposed to be such that an average user can use it,
+to make entries accurately, making sure that no transaction is beyond allowed
+limits. It is very easy to use, in that it takes inputs from users and can keep
+going from month to month (each month of 30 days each at this point). The physical
+input is easy to replace with a system generated input. The way this program works
+is that you give it the day of the month and then all transactions on that day in 
+order of their taking place. Any transactions that are invalid (withdrawal too high or
+deposit too much), are taken care of adequately. At the end of a month, the user has an
+option to move to the next month or end the simulation. The balance amount carries over
+from month to month, implying that if you spent all your credit last month and have not
+repaid, then the credit limit for this month is ), ie, your balances from the previous
+month impact this month, as is the case with most credit cards.
