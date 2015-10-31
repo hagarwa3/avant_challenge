@@ -23,7 +23,8 @@ This has been implemented using a basic hash table implementation to store what 
 another occurence of the number were. This helps us not go through the array a second time for the same number. Also, since we
 use the array after sorting, we do not have to go all the way through the entire array for every element, and we can go from the start
 till a certain element, thus still having the same complexity, but taking half the number of iterations. The caching however is a hash
-table and that helps us get a pretty efficient solution. Also, when we find a certain factor, all it's factors also get added as factors, so that those factors are not run calculations for again, saving us time.
+table and that helps us get a pretty efficient solution. Also, when we find a certain factor,
+all it's factors also get added as factors, so that those factors are not run calculations for again, saving us time.
 
 2.  What is the performance of your caching implementation?  Is there any way to make it more performant.
 

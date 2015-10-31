@@ -1,4 +1,4 @@
-def total(string):
+def total(string):          # this method is just to convert our input of a list of transactions into a sum
     newlist = string.split()
     sumtotal = 0.0
     for item in newlist:
@@ -9,16 +9,26 @@ def total(string):
             continue
     return sumtotal   
 
-def monthlyactivity(interest, principal, apr, limit):
-    print "enter day number and transactions on that day, in order. Enter day as 31 to end simulation for this month"
+def monthlyactivity(interest, principal, apr, limit, totalprin):
+    print "enter day number from this month and transactions on that day, in order. Enter day as 31 to end simulation for this month,"
     day = 0
     prevday = 0
-    while day<30:
+    while day<31:
         day = int(input("enter day number: "))
         if day == 31:
             newinterest = (day-prevday) * (apr/365) * principal
             interest+=newinterest
-            break
+            totalprin+=principal
+            check = int(input("would you like to end the entire simulation? Enter 1 for 'yes' and 0 for 'no':"))
+            if check ==1:
+                break
+            else:
+                principal = 0.0
+                day = 0
+                prevday = 0
+                print "at the end of this month, total pending = $" + str(totalprin+interest)
+                continue
+                
         else:
             if(day>31) or (day<=prevday):
                 day = prevday
@@ -35,10 +45,12 @@ def monthlyactivity(interest, principal, apr, limit):
                 prevday = day
                 principal = principal + activity
                 if principal<0:
+                    print "your deposit was too much and $" + str(-1*activity) +  " of it has been returned"
                     principal = 0
                 if principal>limit:
+                    print "your withdrawal was too much and $" + str(activity-limit) + " of it has been declined"
                     principal = limit
-    return [interest, principal]
+    return [interest, principal, totalprin]
 
 
 
@@ -53,7 +65,11 @@ def main():
         limit = 1000.0
     principal = 0.0
     interest = 0.0
-    result = monthlyactivity(interest, principal, apr, limit)
+    totalprin = 0.0
+    result = monthlyactivity(interest, principal, apr, limit, totalprin)
     interest = result[0]
     principal = result[1]
-    print principal+interest
+    totalprin = result[2]
+    print "at the end of your entire credit history for this account, total payable = $" + str(totalprin+interest)
+    
+main()
