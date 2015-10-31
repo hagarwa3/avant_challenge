@@ -17,6 +17,8 @@ Additional Questions:
 of the cache look like?  By cache I mean, given an array input, skip the calculation of the output if you have already
 calculated the output at least once already.
 
+Answer: 
+
 This has been implemented using a basic hash table implementation to store what the results of my previous calculation of factors for 
 another occurence of the number were. This helps us not go through the array a second time for the same number. Also, since we
 use the array after sorting, we do not have to go all the way through the entire array for every element, and we can go from the start
@@ -24,6 +26,8 @@ till a certain element, thus still having the same complexity, but taking half t
 table and that helps us get a pretty efficient solution. Also, when we find a certain factor, all it's factors also get added as factors, so that those factors are not run calculations for again, saving us time.
 
 2.  What is the performance of your caching implementation?  Is there any way to make it more performant.
+
+Answer: 
 
 The performance is O(1) in general cases (could be O(n) worst case scenario), and basically if we have seen a number before, we are
 almost guaranteed that we get the result instantly. The sorting is in O(n log n) time. And the actual full algorithm will be 
@@ -36,6 +40,8 @@ Given an array of [10, 5, 2, 20], the output would be:
 {10: [20], 5: [10,20], 2: [10, 20], 20: []}
 
 Would this change your caching algorithim?
+
+Answer:
 
 The caching would still remain the same, just that to run my implementation, instead of sorting my array in ascending order,
 it will be sorted in descending order, and the methos is run the same, just that the check for factors is reversed,
