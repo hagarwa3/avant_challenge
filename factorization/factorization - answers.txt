@@ -1,0 +1,44 @@
+Accomplish in a language of your choice:
+
+Input: Given an array of integers
+
+Output: In whatever representation you wish, output each integer in the array and all the other integers in the array that are
+factors of the first integer.  
+
+Example:
+
+  Given an array of [10, 5, 2, 20], the output would be:
+
+{10: [5, 2], 5: [], 2: [], 20: [10,5,2]}
+
+Additional Questions: 
+
+1.  What if you were to cache the calculation, for example in the file system.  What would an example implementation
+of the cache look like?  By cache I mean, given an array input, skip the calculation of the output if you have already
+calculated the output at least once already.
+
+This has been implemented using a basic hash table implementation to store what the results of my previous calculation of factors for 
+another occurence of the number were. This helps us not go through the array a second time for the same number. Also, since we
+use the array after sorting, we do not have to go all the way through the entire array for every element, and we can go from the start
+till a certain element, thus still having the same complexity, but taking half the number of iterations. The caching however is a hash
+table and that helps us get a pretty efficient solution. Also, when we find a certain factor, all it's factors also get added as factors, so that those factors are not run calculations for again, saving us time.
+
+2.  What is the performance of your caching implementation?  Is there any way to make it more performant.
+
+The performance is O(1) in general cases (could be O(n) worst case scenario), and basically if we have seen a number before, we are
+almost guaranteed that we get the result instantly. The sorting is in O(n log n) time. And the actual full algorithm will be 
+in O(n^2) time. 
+
+3.  What if you wanted to reverse the functionality.  What if you wanted to output each integer and all the other integers in the 
+array that is the first integer is a factor of I.E:
+
+Given an array of [10, 5, 2, 20], the output would be:
+{10: [20], 5: [10,20], 2: [10, 20], 20: []}
+
+Would this change your caching algorithim?
+
+The caching would still remain the same, just that to run my implementation, instead of sorting my array in ascending order,
+it will be sorted in descending order, and the methos is run the same, just that the check for factors is reversed,
+implying that I check for multiples instead of factors. Everything else remains pretty much the same.
+
+With caching, the output should be the same except the calculations are not performed.
